@@ -20,3 +20,24 @@ def register():
     user = create_user(email, password)
 
     return jsonify({"id": user.id, "email": user.email}), 201
+
+@bp.post('/login')
+def login():
+    data = request.get_json() or {}
+    
+    token = authenticate(data.get('email'), data.get('password'))
+
+    if not token:
+        return jsonify({"error": "Email ou senha inválidos"}), 401
+
+    return jsonify({"token": token}), 200
+
+@bp.get("")
+@jwt_required()
+def list_user():
+
+    _ = get_jwt_identity()
+    
+    users = User.query.with_entities(User.id, User.email).all()
+
+    return jsonify([{"id": user.id, "email": user.email} for user in users]), 200
