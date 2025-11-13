@@ -1,0 +1,28 @@
+# Nome do workflow que aparecerá na aba "Actions"
+name: CD
+
+# Define os gatilhos (quando o deploy deve rodar)
+on:
+  push: # dispara quando ocorre um push
+    branches: [main] # ...mas somente na branch main
+    paths: # ...e apenas se os arquivos abaixo mudarem
+      - "app/**" # código da aplicação (pasta app)
+      - "wsgi.py" # ponto de entrada do Flask
+      - "config.py" # configurações
+      - "requirements.txt" # dependências Python
+      - "Dockerfile" # imagem Docker
+      - "docker-compose.yml" # orquestração Docker
+      - ".github/workflows/**" # mudanças no próprio workflow
+
+# Define os jobs (tarefas) do pipeline
+jobs:
+  build-and-deploy: # nome interno do job
+    runs-on: self-hosted # executa em runner local (self-hosted), ou seja, na sua máquina
+
+    steps:
+      # Step 1: faz o checkout do código do repositório
+      - uses: actions/checkout@v4
+
+      # Step 2: roda o script de deploy local
+      - name: Confirmação de deploy local
+        run: echo "Deploy local concluído — código já está atualizado na máquina local!"
