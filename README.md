@@ -1,12 +1,6 @@
 
 # Auth API – Programa.AI (AppSec)
 
-API de autenticação desenvolvida como parte do curso de AppSec da Programa.AI.
-
-> Este README foi gerado a partir das informações disponíveis (stack: Python ~89%, Mako ~5.4%, Dockerfile ~5%, Shell ~0.3%). Caso algum framework ou serviço listado como “TODO” ainda não esteja definido, ajuste conforme a implementação real do repositório.
-
----
-
 ## ⚡ Visão Geral
 
 Esta API fornece endpoints de autenticação e controle de acesso para aplicações que necessitam de:
